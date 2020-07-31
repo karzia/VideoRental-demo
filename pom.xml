@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>video.rental.demo</groupId>
-	<artifactId>VideoRentalDemo</artifactId>
+	<artifactId>VideoRental-demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>VideoRentalDemo</name>
+	<name>VideoRental-demo</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -27,7 +27,7 @@
 			</plugin>
 		</plugins>
 	</build>
-	
+
 	<dependencies>
 
 		<dependency>
