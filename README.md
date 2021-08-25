@@ -2,8 +2,8 @@
 ## 과제
 
 ##1. Architecture Refactoring Result
-- [ ] 미완성 출력문 일부 완성 필요.
-- [ ] graphic user interface로 돌아가는 것을 캡쳐 해서 보여줘야함.
+- [*] 미완성 출력문 일부 완성 필요.
+- [*] graphic user interface로 돌아가는 것을 캡쳐 해서 보여줘야함.
 
 
 
