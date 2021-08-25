@@ -105,4 +105,7 @@ public class Customer {
 		return result;
 	}
 
+	public void addRental(Rental rental) {
+		rentals.add(rental);
+	}
 }

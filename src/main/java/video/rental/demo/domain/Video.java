@@ -94,10 +94,7 @@ public class Video {
 	public boolean rentFor(Customer customer) {
 		if (!isUnderAge(customer)) {
 			setRented(true);
-			Rental rental = new Rental(this);
-			List<Rental> customerRentals = customer.getRentals();
-			customerRentals.add(rental);
-			customer.setRentals(customerRentals);
+			customer.addRental(new Rental(this));
 			return true;
 		} else {
 			return false;
