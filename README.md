@@ -2,13 +2,18 @@
 ## 과제
 
 ##1. Architecture Refactoring Result
-- 출력문 일부. => 완성...
-- graphic user interface로 돌아가는 것을 캡쳐 해서 보여줘야함.
+- [ ] 미완성 출력문 일부 완성 필요.
+- [ ] graphic user interface로 돌아가는 것을 캡쳐 해서 보여줘야함.
 
 
 
 ## 2. Smells and Code/Design Level Refactoring(5개)
 - Smells 
+- 
+- Video type 별 동작이 달라지는 부분들이 산재되어있음.. => 샷건 써저리 스맬....
+
+   stratergy pattern , factory method pattern 적용.
+
 
 
 ## 3. 느낀점...
