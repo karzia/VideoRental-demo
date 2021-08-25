@@ -82,7 +82,7 @@ public class CmdUI implements UIInterface {
 	public void listCustomers() {
 		System.out.println("List of customers");
 
-		interactor.listCustomers();
+		System.out.print(interactor.listCustomers());
 		
 		System.out.println("End of list");
 	}
@@ -91,7 +91,7 @@ public class CmdUI implements UIInterface {
 		System.out.println("Enter customer code: ");
 		int code = scanner.nextInt();
 
-		interactor.getCustomerReport(code);
+		System.out.println(interactor.getCustomerReport(code));
 	}
 
 	public void rentVideo() {
