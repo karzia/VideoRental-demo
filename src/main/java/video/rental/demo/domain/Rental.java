@@ -19,29 +19,23 @@ public class Rental {
 	private int status; // 0 for Rented, 1 for Returned
 	private LocalDateTime rentDate;
 	private LocalDateTime returnDate;
-	@OneToOne(fetch = FetchType.EAGER)
-	private Customer customer;
+
 	@OneToOne(fetch = FetchType.EAGER)
 	private Video video;
 
-	public Rental() {
+	Rental() {
 	}
 
-	public Rental(Customer customer, Video video) {
-		this.customer = customer;
+	public Rental(Video video) {
 		this.video = video;
 		this.status = 0;
 		this.rentDate = LocalDateTime.now();
 	}
 
-	public Customer getCustomer(){return customer;}
 	public Video getVideo() {
 		return video;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
 	public void setVideo(Video video) {
 		this.video = video;
 	}

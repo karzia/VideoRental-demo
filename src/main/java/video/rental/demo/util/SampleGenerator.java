@@ -32,16 +32,13 @@ public class SampleGenerator {
 		repository.saveVideo(v2);
 		repository.saveVideo(v3);
 
-		Rental r1 = new Rental(james, v1);
-		Rental r2 = new Rental(james, v2);
+		Rental r1 = new Rental(v1);
+		Rental r2 = new Rental(v2);
 
-		RentalManager.addRental(r1);
-		RentalManager.addRental(r2);
-
-/*		List<Rental> rentals = james.getRentals();
+		List<Rental> rentals = james.getRentals();
 		rentals.add(r1);
 		rentals.add(r2);
-		james.setRentals(rentals);*/
+		james.setRentals(rentals);
 		repository.saveCustomer(james);
 	}
 }
