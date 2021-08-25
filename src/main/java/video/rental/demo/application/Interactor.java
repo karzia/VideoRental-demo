@@ -76,28 +76,29 @@ public class Interactor {
 		return builder.toString();
 	}
 
-	public void listCustomers() {
+	public String listCustomers() {
+		StringBuilder builder = new StringBuilder();
 		List<Customer> customers = getRepository().findAllCustomers();
-	
+
 		for (Customer customer : customers) {
-			System.out.println("ID: " + customer.getCode() + "\nName: " + customer.getName() + "\tRentals: "
-					+ customer.getRentals().size());
+			builder.append("ID: " + customer.getCode() + "\nName: " + customer.getName() + "\tRentals: "
+					+ customer.getRentals().size() + "\n");
 			for (Rental rental : customer.getRentals()) {
-				System.out.print("\tTitle: " + rental.getVideo().getTitle() + " ");
-				System.out.print("\tPrice Code: " + rental.getVideo().getPriceCode());
-				System.out.println("\tReturn Status: " + rental.getStatus());
+				builder.append("\tTitle: " + rental.getVideo().getTitle() + " ");
+				builder.append("\tPrice Code: " + rental.getVideo().getPriceCode());
+				builder.append("\tReturn Status: " + rental.getStatus()+"\n");
 			}
 		}
+		return builder.toString();
 	}
 
-	public void getCustomerReposrt(int code) {
+	public String getCustomerReport(int code) {
 		Customer foundCustomer = getRepository().findCustomerById(code);
-	
+
 		if (foundCustomer == null) {
-			System.out.println("No customer found");
+			return "No customer found";
 		} else {
-			String result = foundCustomer.getReport();
-			System.out.println(result);
+			return foundCustomer.getReport();
 		}
 	}
 
@@ -105,15 +106,15 @@ public class Interactor {
 		Customer foundCustomer = getRepository().findCustomerById(code);
 		if (foundCustomer == null)
 			return;
-	
+
 		Video foundVideo = getRepository().findVideoByTitle(videoTitle);
-	
+
 		if (foundVideo == null)
 			return;
-	
+
 		if (foundVideo.isRented() == true)
 			return;
-	
+
 		Boolean status = foundVideo.rentFor(foundCustomer);
 		if (status == true) {
 			getRepository().saveVideo(foundVideo);
@@ -134,14 +135,13 @@ public class Interactor {
 		else if (videoRating == 2) rating = Rating.FIFTEEN;
 		else if (videoRating == 3) rating = Rating.EIGHTEEN;
 		else throw new IllegalArgumentException("No such rating " + videoRating);
-		
+
 		Video video = new Video(title, videoType, priceCode, rating, registeredDate);
-	
+
 		getRepository().saveVideo(video);
 	}
 
 	private Repository getRepository() {
 		return repository;
 	}
-
 }
