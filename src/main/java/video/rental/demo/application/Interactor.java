@@ -112,7 +112,7 @@ public class Interactor {
 		if (foundVideo.isRented() == true)
 			return;
 
-		Boolean status = foundVideo.rentFor(foundCustomer);
+		Boolean status = foundCustomer.rentFor(foundVideo);
 		if (status == true) {
 			getRepository().saveVideo(foundVideo);
 			getRepository().saveCustomer(foundCustomer);
