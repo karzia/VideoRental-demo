@@ -95,7 +95,7 @@ public class Interactor {
 		if (foundCustomer == null) {
 			return "No customer found";
 		} else {
-			return foundCustomer.getReport();
+			return report.getReport(foundCustomer);
 		}
 	}
 
@@ -122,7 +122,7 @@ public class Interactor {
 	}
 
 	public void registerCustomer(String name, int code, String dateOfBirth) {
-		Customer customer = new Customer(code, name, LocalDate.parse(dateOfBirth), report);
+		Customer customer = new Customer(code, name, LocalDate.parse(dateOfBirth));
 		getRepository().saveCustomer(customer);
 	}
 
