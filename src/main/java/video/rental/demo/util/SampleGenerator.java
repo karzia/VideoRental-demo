@@ -15,9 +15,9 @@ public class SampleGenerator {
 	}
 
 	public void generateSamples() {
-		Customer james = new Customer(0, "James", LocalDate.parse("1975-05-15"), report);
-		Customer brown = new Customer(1, "Brown", LocalDate.parse("2002-03-17"), report);
-		Customer shawn = new Customer(2, "Shawn", LocalDate.parse("2010-11-11"), report);
+		Customer james = new Customer(0, "James", LocalDate.parse("1975-05-15"));
+		Customer brown = new Customer(1, "Brown", LocalDate.parse("2002-03-17"));
+		Customer shawn = new Customer(2, "Shawn", LocalDate.parse("2010-11-11"));
 		repository.saveCustomer(james);
 		repository.saveCustomer(brown);
 		repository.saveCustomer(shawn);

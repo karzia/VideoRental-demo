@@ -16,17 +16,16 @@ public class Customer {
 	private int code;
 	private String name;
 	private LocalDate dateOfBirth;
-	private IReport report;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Rental> rentals = new ArrayList<Rental>();
 
-	public Customer(int code, String name, LocalDate dateOfBirth, IReport report) {	// for hibernate
+	public Customer(int code, String name, LocalDate dateOfBirth) {	// for hibernate
 
 		this.code = code;
 		this.name = name;
 		this.dateOfBirth = dateOfBirth;
-		this.report = report;
+
 	}
 
 	public int getCode() {
@@ -49,9 +48,6 @@ public class Customer {
 		this.rentals = rentals;
 	}
 
-	public String getReport() {
-		return report.getReport(this);
-	}
 
 	public void addRental(Rental rental) {
 		rentals.add(rental);
