@@ -9,7 +9,9 @@ import java.nio.file.Paths;
 import java.util.stream.Collectors;
 
 import video.rental.demo.application.Interactor;
+import video.rental.demo.domain.IReport;
 import video.rental.demo.domain.Repository;
+import video.rental.demo.domain.TextReportImpl;
 import video.rental.demo.infrastructure.RepositoryMemImpl;
 import video.rental.demo.presentation.CmdUI;
 import video.rental.demo.util.SampleGenerator;
@@ -50,10 +52,11 @@ public class GoldenMaster {
 		ByteArrayOutputStream ostream = new ByteArrayOutputStream();
 		PrintStream pstream = new PrintStream(ostream);
 		System.setOut(pstream);
-	
+
+		IReport report = new TextReportImpl();
 		Repository repository = new RepositoryMemImpl();
-		Interactor interactor = new Interactor(repository);
-		new SampleGenerator(repository).generateSamples();
+		Interactor interactor = new Interactor(repository, report);
+		new SampleGenerator(repository, report).generateSamples();
 		ui = new CmdUI(interactor);
 		ui.start();
 		

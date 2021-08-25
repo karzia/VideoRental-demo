@@ -4,19 +4,16 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import video.rental.demo.domain.Customer;
-import video.rental.demo.domain.Rating;
-import video.rental.demo.domain.Rental;
-import video.rental.demo.domain.Repository;
-import video.rental.demo.domain.Video;
+import video.rental.demo.domain.*;
 
 public class Interactor {
 
 	private Repository repository;
+	private IReport report;
 
-	public Interactor(Repository repository) {
+	public Interactor(Repository repository, IReport report) {
 		this.repository = repository;
-		
+		this.report = report;
 	}
 	
 	public String clearRentals(int customerCode) {
@@ -125,7 +122,7 @@ public class Interactor {
 	}
 
 	public void registerCustomer(String name, int code, String dateOfBirth) {
-		Customer customer = new Customer(code, name, LocalDate.parse(dateOfBirth));
+		Customer customer = new Customer(code, name, LocalDate.parse(dateOfBirth), report);
 		getRepository().saveCustomer(customer);
 	}
 
