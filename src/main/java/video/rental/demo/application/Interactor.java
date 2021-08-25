@@ -132,7 +132,7 @@ public class Interactor {
 		else if (videoRating == 3) rating = Rating.EIGHTEEN;
 		else throw new IllegalArgumentException("No such rating " + videoRating);
 
-		Video video = new Video(title, videoType, priceCode, rating, registeredDate);
+		Video video = Video.createVideo(videoType , title,  priceCode, rating, registeredDate);
 
 		getRepository().saveVideo(video);
 	}

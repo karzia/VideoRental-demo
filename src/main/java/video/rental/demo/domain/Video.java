@@ -1,5 +1,7 @@
 package video.rental.demo.domain;
 
+import video.rental.demo.util.Utils;
+
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
@@ -9,7 +11,7 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "VIDEO", uniqueConstraints = { @UniqueConstraint(columnNames = { "title" }) })
-public class Video {
+public abstract class Video {
 	@Id
 	private String title;
 	private Rating videoRating;
@@ -19,7 +21,6 @@ public class Video {
 	public static final int NEW_RELEASE = 2;
 	public static final int CHILDREN = 3;
 
-	private int videoType;
 	public static final int VHS = 1;
 	public static final int CD = 2;
 	public static final int DVD = 3;
@@ -27,33 +28,30 @@ public class Video {
 	private LocalDate registeredDate;
 	private boolean rented;
 
+	public static Video createVideo(int videoType, String title, int priceCode, Rating videoRating, LocalDate registeredDate) {
+		switch (videoType) {
+			case Video.CD:
+				return new VideoCD(title, priceCode, videoRating, registeredDate);
+			case Video.DVD:
+				return new VideoDVD(title, priceCode, videoRating, registeredDate);
+			case Video.VHS:
+				return new VideoVHS(title, priceCode, videoRating, registeredDate);
+			default:
+				return null;
+		}
+	}
+
 	public Video() {
 	} // for hibernate
 
-	public Video(String title, int videoType, int priceCode, Rating videoRating, LocalDate registeredDate) {
+	Video(String title, int priceCode, Rating videoRating, LocalDate registeredDate) {
 		this.title = title;
-		this.videoType = videoType;
 		this.priceCode = priceCode;
 		this.videoRating = videoRating;
 		this.registeredDate = registeredDate;
 		this.rented = false;
 	}
 
-	public int getLateReturnPointPenalty() {
-		int pentalty = 0;
-		switch (videoType) {
-		case VHS:
-			pentalty = 1;
-			break;
-		case CD:
-			pentalty = 2;
-			break;
-		case DVD:
-			pentalty = 3;
-			break;
-		}
-		return pentalty;
-	}
 
 	public int getPriceCode() {
 		return priceCode;
@@ -83,8 +81,26 @@ public class Video {
 		return registeredDate;
 	}
 
-	public int getVideoType() {
-		return videoType;
+	public boolean isUnderAge(int age) {
+		switch (videoRating) {
+			case TWELVE:
+				return age < 12;
+			case FIFTEEN:
+				return age < 15;
+			case EIGHTEEN:
+				return age < 18;
+			default:
+				return false;
+		}
 	}
+
+	// abstract
+	public abstract int getLateReturnPointPenalty();
+	abstract public int getVideoType();
+
+	abstract public int getDaysRentedLimit();
+
+
+
 
 }
