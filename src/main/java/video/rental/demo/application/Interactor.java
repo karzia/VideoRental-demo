@@ -47,9 +47,8 @@ public class Interactor {
 		List<Rental> customerRentals = foundCustomer.getRentals();
 	
 		for (Rental rental : customerRentals) {
-			if (rental.getVideo().getTitle().equals(videoTitle) && rental.getVideo().isRented()) {
+			if (rental.ableToRent(videoTitle)) {
 				Video video = rental.returnVideo();
-				video.setRented(false);
 				getRepository().saveVideo(video);
 				break;
 			}

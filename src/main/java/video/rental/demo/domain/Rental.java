@@ -48,6 +48,7 @@ public class Rental {
 		if (status == 0) {
 			this.status = 1;
 			this.returnDate = LocalDateTime.now();
+			video.setRented(false);
 		}
 		return video;
 	}
@@ -90,5 +91,9 @@ public class Rental {
         int days = (int) (ChronoUnit.HOURS.between(getRentDate(), end) / 24 );
 
 	    return days == 0 ? 1 : days + 1;
+	}
+
+	public boolean ableToRent(String videoTitle) {
+		return getVideo().getTitle().equals(videoTitle) && getVideo().isRented();
 	}
 }
