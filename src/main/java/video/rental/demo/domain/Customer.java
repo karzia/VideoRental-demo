@@ -61,6 +61,10 @@ public class Customer {
 		CalendarService calService = new CalendarService();
 		int age = getAge(dateOfBirth);
 
+		return matchRatingByAge(video, age);
+	}
+
+	private boolean matchRatingByAge(Video video, int age) {
 		// determine if customer is under legal age for rating
 		switch (video.getVideoRating()) {
 		case TWELVE:
