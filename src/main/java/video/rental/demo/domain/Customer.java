@@ -19,16 +19,12 @@ public class Customer {
 	private int code;
 	private String name;
 	private LocalDate dateOfBirth;
-
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private List<Rental> rentals = new ArrayList<Rental>();
+//	List<Rental> rentals = new ArrayList<Rental>();
 
 	public Customer(int code, String name, LocalDate dateOfBirth) {	// for hibernate
-
 		this.code = code;
 		this.name = name;
 		this.dateOfBirth = dateOfBirth;
-
 	}
 
 	public int getCode() {
@@ -44,60 +40,18 @@ public class Customer {
 	}
 
 	public List<Rental> getRentals() {
-		return rentals;
+		return RentalManager.getRentals(this);
 	}
 
 	public void setRentals(List<Rental> rentals) {
-		this.rentals = rentals;
+		RentalManager.setRentals(this, rentals);
 	}
-
 
 	public void addRental(Rental rental) {
-		rentals.add(rental);
+		getRentals().add(rental);
 	}
 
-	public boolean isUnderAge(Video video) {
-		// calculate customer's age in years and months
-		CalendarService calService = new CalendarService();
-		int age = getAge(dateOfBirth);
 
-		return matchRatingByAge(video, age);
-	}
 
-	private boolean matchRatingByAge(Video video, int age) {
-		// determine if customer is under legal age for rating
-		switch (video.getVideoRating()) {
-		case TWELVE:
-			return age < 12;
-		case FIFTEEN:
-			return age < 15;
-		case EIGHTEEN:
-			return age < 18;
-		default:
-			return false;
-		}
-	}
 
-	private int getAge(LocalDate dateOfBirth) {
-
-		CalendarService calendarService = new CalendarService();
-		Calendar calNow = calendarService.getCurrentDay();
-		Calendar calDateOfBirth = calendarService.parseBirthDay(getDateOfBirth());
-
-		// calculate age different in years and months
-		int ageYr = (calNow.get(Calendar.YEAR) - calDateOfBirth.get(Calendar.YEAR));
-		int ageMo = (calNow.get(Calendar.MONTH) - calDateOfBirth.get(Calendar.MONTH));
-
-		return (ageMo < 0) ? ageYr-1 : ageYr;
-	}
-
-	public boolean rentFor(Video video) {
-		if (!isUnderAge(video)) {
-			video.setRented(true);
-			addRental(new Rental(video));
-			return true;
-		} else {
-			return false;
-		}
-	}
 }

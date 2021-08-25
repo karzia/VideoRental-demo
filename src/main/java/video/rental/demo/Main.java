@@ -4,6 +4,7 @@ import video.rental.demo.application.Interactor;
 import video.rental.demo.domain.IReport;
 import video.rental.demo.domain.Repository;
 import video.rental.demo.domain.TextReportImpl;
+import video.rental.demo.infrastructure.RepositoryDBImpl;
 import video.rental.demo.infrastructure.RepositoryMemImpl;
 import video.rental.demo.presentation.CmdUI;
 import video.rental.demo.presentation.GraphicUI;
@@ -17,6 +18,7 @@ public class Main {
 
 		IReport report = new TextReportImpl();
 		Repository repository = new RepositoryMemImpl();
+//		Repository repository = new RepositoryDBImpl();
 		Interactor interactor = new Interactor(repository, report);
 		new SampleGenerator(repository, report).generateSamples();
 		//ui = new CmdUI(interactor);
