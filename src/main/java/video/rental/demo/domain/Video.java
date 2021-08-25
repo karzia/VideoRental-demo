@@ -1,7 +1,5 @@
 package video.rental.demo.domain;
 
-import video.rental.demo.util.Utils;
-
 import java.time.LocalDate;
 
 import javax.persistence.Entity;

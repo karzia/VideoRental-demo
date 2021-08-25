@@ -1,10 +1,7 @@
 package video.rental.demo.domain;
 
-import video.rental.demo.util.Utils;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -52,7 +49,7 @@ public class Customer {
 	}
 
 	public boolean rentFor(Video video) {
-		int age = Utils.getAge(dateOfBirth);
+		int age = CalendarService.getAge(dateOfBirth);
 		if (!video.isUnderAge(age)) {
 			video.setRented(true);
 			rentals.add(new Rental(video));
