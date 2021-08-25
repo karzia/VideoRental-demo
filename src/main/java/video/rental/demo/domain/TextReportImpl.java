@@ -19,7 +19,8 @@ public class TextReportImpl implements IReport {
 
             daysRented = rental.getDaysRented();
 
-            switch (rental.getVideo().getPriceCode()) {
+            Video video = rental.getVideo();
+            switch (video.getPriceCode()) {
                 case Video.REGULAR:
                     eachCharge += 2;
                     if (daysRented > 2)
@@ -36,13 +37,13 @@ public class TextReportImpl implements IReport {
             }
 
             eachPoint++;
-            if ((rental.getVideo().getPriceCode() == Video.NEW_RELEASE))
+            if (video.getPriceCode() == Video.NEW_RELEASE)
                 eachPoint++;
 
             if (daysRented > rental.getDaysRentedLimit())
-                eachPoint -= Math.min(eachPoint, rental.getVideo().getLateReturnPointPenalty());
+                eachPoint -= Math.min(eachPoint, video.getLateReturnPointPenalty());
 
-            builder.append("\t" + rental.getVideo().getTitle() + "\tDays rented: " + daysRented + "\tCharge: " + eachCharge
+            builder.append("\t" + video.getTitle() + "\tDays rented: " + daysRented + "\tCharge: " + eachCharge
                     + "\tPoint: " + eachPoint + "\n");
 
             totalCharge += eachCharge;
