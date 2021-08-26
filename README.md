@@ -15,7 +15,7 @@ screenshot
 ## 2. Smells and Code/Design Level Refactoring(5개)
 Description | Smells | Refactoring
 ------------|--------|------------ 
-Video type 별 동작이 달라지는 부분들이 산재되어있음 샷건 | 써저리 스맬  |  stratergy pattern , factory method pattern 적용.
+Video type 별 동작이 달라지는 부분들이 산재되어있음  | 샷건 써저리 스맬  |  stratergy pattern , factory method pattern 적용.
 
 
 
